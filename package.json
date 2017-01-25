@@ -1,0 +1,22 @@
+{
+  "name": "savvy-survey",
+  "version": "1.0.0",
+  "description": "A simple but smart survey system agnostic of service implementation details",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/cucumber.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hynding/savvy-survey.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hynding/savvy-survey/issues"
+  },
+  "homepage": "https://github.com/hynding/savvy-survey#readme",
+  "devDependencies": {
+    "cucumber": "^2.0.0-rc.6"
+  }
+}
