@@ -31,6 +31,11 @@ defineSupportCode(function({Given, When, Then}){
     expectedQuestion = survey.questions[num-1];
     assert.equal(actualQuestion, expectedQuestion);
   });
+
+  Then("I do not receive another question", ()=>{
+    expectedQuestion = survey.getQuestion();
+    assert.equal(expectedQuestion, null);
+  });
 });
 
 var questionPrefix = 'q';

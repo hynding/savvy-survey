@@ -1,5 +1,5 @@
 {
-  "name": "savvy-survey",
+  "name": "survey-skipper",
   "version": "1.0.0",
   "description": "A simple but smart survey system agnostic of service implementation details",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hynding/savvy-survey.git"
+    "url": "git+https://github.com/hynding/survey-skipper.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hynding/savvy-survey/issues"
+    "url": "https://github.com/hynding/survey-skipper/issues"
   },
-  "homepage": "https://github.com/hynding/savvy-survey#readme",
+  "homepage": "https://github.com/hynding/survey-skipper#readme",
   "devDependencies": {
     "cucumber": "^2.0.0-rc.6"
   }
