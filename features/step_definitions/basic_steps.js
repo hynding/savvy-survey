@@ -14,8 +14,10 @@ defineSupportCode(function({Given, When, Then}){
   });
 
   Given("question {a} answer {value} maps to question {b}", (a, value, b)=>{
-    var questionA = survey.questions[a-1];
-    survey.updateMapping(questionA.id, generateMapping(b-1, value));
+    var questionA = survey.questions[a-1]
+      , questionB = survey.questions[b-1]
+      ;
+    survey.updateMapping(questionA.id, generateMapping(questionB.id, value));
   });
 
   When("I answer question {num} with {value}", (num, value)=>{

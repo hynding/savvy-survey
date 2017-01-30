@@ -36,8 +36,9 @@ module.exports = function({id, title, description, questions, questionsMap}) {
     var qMap = questionsMap[q.id];
     var currentAnswer = _answers[q.id];
     var hasAnswer = currentAnswer && currentAnswer.isValid();
-    if (hasAnswer && qMap && qMap[currentAnswer.value] !== undefined) {
-      _index = qMap[currentAnswer.value];
+    var nextId = qMap ? qMap[currentAnswer.value] : undefined;
+    if (hasAnswer && nextId !== undefined) {
+      _index = _map[nextId];
     } else {
       _index++;
     }
