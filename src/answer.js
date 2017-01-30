@@ -1,12 +1,12 @@
 class Answer {
 
   constructor({text, value}) {
-    this.text = text;
+    this.text = text || value;
     this.value = sanitize(value);
   }
 
   isValid() {
-    return this.value !== '' && this.value !== null;
+    return this.value !== '' && this.value !== null && this.value !== undefined;
   }
 }
 

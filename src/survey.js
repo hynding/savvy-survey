@@ -1,58 +1,68 @@
-module.exports = function({id, title, description, questions, questionsMap}) {
+class Survey {
+  constructor({id, title, description, questions, answers, currentQuestionId, answerMap}) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.questions = questions || [];
+    this.answers = answers || {};
+    this.answerMap = answerMap || {};
+    this.index = 0;
+    this.idMap = {};
 
-  var questionsMap = questionsMap || {}
-    , _map = {}
-    , _index = 0
-    , _answers = {}
-    , self = this
-    ;
+    this.mapIndices(currentQuestionId)
+  }
 
-  self.id = id;
-  self.title = title;
-  self.description = description;
-  self.questions = questions;
+  mapIndices(currentQuestionId) {
+    this.questions.forEach((q, i)=>{
+      if (q.id === currentQuestionId) {
+        this.index = i;
+      }
+      this.idMap[q.id] = i;
+    });
+  }
 
-  mapIndices();
+  mapAnswer(fromQuestion, answer, toQuestion) {
+    if (!answer.isValid()) {
+      return console.error('Answer value is invalid for mapping');
+    }
+    this.answerMap[fromQuestion.id] = this.answerMap[fromQuestion.id] || {};
+    this.answerMap[fromQuestion.id][answer.value] = toQuestion.id;
+  }
 
-  self.getQuestion = function() {
-    if (_index >= questions.length) {
+  getQuestion(id) {
+    if (id && this.idMap[id] !== undefined) {
+      this.index = this.idMap[id];
+    }
+    if (this.index >= this.questions.length) {
       return null;
     }
-    return questions[_index];
-  };
+    return this.questions[this.index];
+  }
 
-  self.setAnswer = function(answer) {
-    var q = self.getQuestion();
+  setAnswer(answer) {
+    var q = this.getQuestion();
     if (q) {
-      _answers[q.id] = answer;
+      this.answers[q.id] = answer;
     }
-  };
+  }
 
-  self.getNextQuestion = function() {
-    var q = self.getQuestion();
+  getNextQuestion() {
+    var q = this.getQuestion();
     if (!q) {
       return q;
     }
-    var qMap = questionsMap[q.id];
-    var currentAnswer = _answers[q.id];
+    var skippers = this.answerMap[q.id];
+    var currentAnswer = this.answers[q.id];
     var hasAnswer = currentAnswer && currentAnswer.isValid();
-    var nextId = qMap ? qMap[currentAnswer.value] : undefined;
-    if (hasAnswer && nextId !== undefined) {
-      _index = _map[nextId];
+    var nextId = (hasAnswer && skippers) ? skippers[currentAnswer.value] : undefined;
+    if (nextId !== undefined) {
+      this.index = this.idMap[nextId];
     } else {
-      _index++;
+      this.index++;
     }
-    return self.getQuestion();
-  };
-
-  self.updateMapping = function(questionId, map) {
-    questionsMap[questionId] = map;
-  };
-
-  function mapIndices() {
-    _map = {};
-    questions.forEach((q, i)=>{
-      _map[q.id] = i;
-    });
+    return this.getQuestion();
   }
-};
+
+}
+
+module.exports = Survey;

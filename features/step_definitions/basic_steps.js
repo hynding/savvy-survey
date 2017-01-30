@@ -17,7 +17,7 @@ defineSupportCode(function({Given, When, Then}){
     var questionA = survey.questions[a-1]
       , questionB = survey.questions[b-1]
       ;
-    survey.updateMapping(questionA.id, generateMapping(questionB.id, value));
+    survey.mapAnswer(questionA, findAnswer(questionA, value), questionB);
   });
 
   When("I answer question {num} with {value}", (num, value)=>{
@@ -45,14 +45,8 @@ var questionPrefix = 'q';
 function generateSurvey(numQuestions, answers, map) {
   return new Survey({
     questions: generateQuestions(numQuestions, answers),
-    questionsMap: map || {}
+    answerMap: map || {}
   })
-}
-
-function generateMapping(questionId, value) {
-  var map = {};
-  map[value] = questionId;
-  return map;
 }
 
 function generateQuestion(config) {
