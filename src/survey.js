@@ -14,7 +14,7 @@ class Survey {
 
   mapIndices(currentQuestionId) {
     this.questions.forEach((q, i)=>{
-      if (q.id.toString() === currentQuestionId.toString()) {
+      if (currentQuestionId && q.id.toString() === currentQuestionId.toString()) {
         this.index = i;
       }
       this.idMap[q.id] = i;
