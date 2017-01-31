@@ -19,6 +19,7 @@ class Survey {
       }
       this.idMap[q.id] = i;
     });
+    return this;
   }
 
   mapAnswer(fromQuestion, answer, toQuestion) {
@@ -27,6 +28,7 @@ class Survey {
     }
     this.answerMap[fromQuestion.id] = this.answerMap[fromQuestion.id] || {};
     this.answerMap[fromQuestion.id][answer.value] = toQuestion.id;
+    return this;
   }
 
   getQuestion(id) {
@@ -44,6 +46,7 @@ class Survey {
     if (q) {
       this.answers[q.id] = answer;
     }
+    return this;
   }
 
   getNextQuestion() {

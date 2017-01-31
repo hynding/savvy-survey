@@ -16,7 +16,7 @@ Feature: Basic
   Scenario: Answer a mapped question with unmapped value, receive next contextual question
     Given a 3 question survey of yes or no answers
     And question 1 answer yes maps to question 3
-    When I answer question 1 with no
+    When I answer question 1 with now
     And ask for the next question
     Then I am returned question 2
 
