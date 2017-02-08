@@ -1,8 +1,9 @@
 class Answer {
 
-  constructor({text, value}) {
+  constructor({text, value, isCustom}) {
     this.text = text || value;
     this.value = sanitize(value);
+    this.isCustom = isCustom || false;
   }
 
   isValid() {
