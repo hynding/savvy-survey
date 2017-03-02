@@ -75,6 +75,25 @@ class Survey {
     return nextQuestion;
   }
 
+  // Returns a set number of questions starting with the result from getNextQuestion
+  getNextQuestions(num) {
+    var nextQuestion = this.getNextQuestion();
+    if (!nextQuestion) {
+      return nextQuestion;
+    }
+    num = num || 1;
+    return this.questions.slice(this.index, num);
+  }
+
+  // Answers a set list of questions starting with the first question retrieved from 'getNextQuestions'
+  //  Note: only the last answer will take mapping into account for the next question(s)
+  setAnswers(answers, index) {
+    answers.forEach((answer,offset)=>{
+      var question = this.questions[this.index+offset];
+      this.setAnswer(answer, question);
+    });
+  }
+
 }
 
 module.exports = Survey;
