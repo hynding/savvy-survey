@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/hynding/survey-skipper#readme",
   "devDependencies": {
-    "cucumber": "^2.0.0-rc.6"
+    "cucumber": "^2.3.1"
   }
 }
